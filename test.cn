@@ -1,0 +1,52 @@
+fn puts(str: u8*) -> void;
+
+use LinkListNode = {
+    next: LinkListNode*;
+    prev: LinkListNode*;
+    value: u32;
+};
+
+use LinkList = {
+    head: LinkListNode*;
+    tail: LinkListNode*;
+};
+
+fn linklist_push(list: LinkList*, node: LinkListNode*) -> void {
+    if list.head == 0 as(LinkListNode*) {
+        node.prev = node;
+        node.next = node;
+        list.head = node;
+        list.tail = node;
+        return;
+    }
+
+    node.prev = list.tail.prev;
+    node.next = list.head;
+    list.tail = node;
+    return;
+}
+
+fn print_num(num: u32) -> void {
+    let digits: u8[17];
+    let idx: u32 = 16;
+    digits[16] = 0;
+
+    while num {
+        idx = idx - 1;
+        digits[idx] = num % 10 + '0';
+        num = num / 10;
+    }
+
+    puts(digits + idx);
+    return;
+}
+
+fn main() -> i32 {
+    let i = 10;
+    while i != 0 {
+        puts("Hello, world!");
+        i = i - 1;
+    }
+    print_num(568);
+    return 0;
+}
